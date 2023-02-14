@@ -1,1 +1,1 @@
-Uus fail
+"Uus fail"
