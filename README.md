@@ -1,3 +1,3 @@
 # Platvormija2k23
-Esimene versioon
+Esimene versioon\
 Üks muudatus
