@@ -3,75 +3,81 @@ from sys import exit
 
 import pygame.image
 
-pg.init()
+
 # Ekraan ja muu põhi
+pg.init()
 screen = pg.display.set_mode((800,600))
 pg.display.set_caption("Mäng")
 clock = pg.time.Clock()
 
+mäng_käib = True
+
 # Tausta ja muu import
-background_image = pygame.image.load("taust.png")
-tegelase_image_vasak = pg.image.load("Nimetu_vasak.png")
-tegelase_image_parem = pg.image.load("Nimetu_parem.png")
+taust = pg.image.load("taust.png").convert()
+tegelase_image_vasak = pg.image.load("Nimetu_vasak.png").convert()
 
-# Liikumiskirus
-spd = 5
+    # Surface ja rectangle
 
-# Hüppe parameetrid
-isJump = False
-jump_frames = 10
+# Tegelane
+
+class Tegelane(pg.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.surf = pg.image.load("Nimetu_parem.png").convert()
+        self.rect = self.surf.get_rect(midbottom = (15,600))
+        self.gravitatsioon = 0
+
+    def sisend(self):
+        nupp = pg.key.get_pressed()
+        if nupp[pg.K_UP] and self.rect.bottom >= 600:
+            self.gravitatsioon = -20
+
+    def gravitatsiooni_mõju(self):
+        self.gravitatsioon += 1
+        self.rect.y += self.gravitatsioon
+        if self.rect.bottom >= 600:
+            self.rect.bottom = 600
+
+tegelane = pg.sprite.GroupSingle()
+tegelane.add(Tegelane())
+# Platvorm
+plat1_surf = pg.Surface((30,20))
+plat1_rect = plat1_surf.get_rect(midbottom = (200, 600))
 
 
-# Ruudu koordinaadid
-x = 0
-y = 570
-suund = "parem"
 
-tegelane = pg.Surface((30,30))
-tegelane.fill((255,0,0))
-
-
-
-
+# Mängu loop
 while True:
-    pg.time.delay(10)
 
+    # Väljumise loop
     for event in pg.event.get():
+
+        # Väljumiskäsk
         if event.type == pg.QUIT:
             pg.quit()
             exit()
 
-    key = pg.key.get_pressed()
+        # Nupuvajutused
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_SPACE and tegelase_rect.bottom == 600:
+                tegelane_gravitatsioon = -20
 
-    if key[pg.K_RIGHT]:
-        suund = "parem"
-        x += spd
-    if key[pg.K_LEFT]:
-        suund = "vasak"
-        x -= spd
-    if not(isJump):
-        if key[pygame.K_UP]:
-            isJump = True
-    else:
-        if jump_frames >= -10:
-            y -= (jump_frames * abs(jump_frames)) * 0.5
-            jump_frames -= 1
-            print(jump_frames)
-        else:
-            print("ahoi")
-            jump_frames = 10
-            isJump = False
+            if event.key == pg.K_RIGHT:
+                    tegelase_rect.x += 15
 
+        # Joonistamised
 
-    screen.blit(background_image, (0, 0))
+    if mäng_käib:
+        # Taust
+        screen.blit(taust,(0,0))
 
-    if suund == "parem":
-        screen.blit(tegelase_image_parem, (x, y))
-    elif suund == "vasak":
-        screen.blit(tegelase_image_vasak, (x, y))
+        # Platvormid
+        screen.blit(plat1_surf, plat1_rect)
 
-
-
+        tegelane.draw(screen)
+        # Jala ära löömine
+        if plat1_rect.colliderect(tegelase_rect):
+            mäng_käib = False
 
     pg.display.update()
     clock.tick(60)
