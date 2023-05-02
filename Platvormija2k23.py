@@ -43,7 +43,7 @@ plat_rect = plat_surf.get_rect(bottomleft = (100, 500))
 #Punktid
 punktid = 0
 test_font = pg.font.Font(None, 30)
-text_surface = test_font.render(f'Punkte {punktid}', True, 'Black')
+text_surface = test_font.render(f'Punkte {punktid}', True, (0,0,0))
 
 #Gravitatsioon
 gravitatsioon = 0
@@ -67,9 +67,11 @@ while True:
     #paremale-vasakule
     if event.type == pg.KEYDOWN:
         if event.key == pg.K_RIGHT:
+            suund = "parem"
             tegelase_image_parem_rect.x += 10
             tegelase_image_vasak_rect.x += 10
         if event.key == pg.K_LEFT:
+            suund = "vasak"
             tegelase_image_parem_rect.x -= 10
             tegelase_image_vasak_rect.x -= 10
     # Hiir
@@ -138,7 +140,7 @@ while True:
         screen.blit(plat_surf, plat_rect)
 
         #Punktide näitamine
-        text_surface = test_font.render(f'Punkte: {punktid}', True, 'Black')
+        text_surface = test_font.render(f'Punkte: {punktid}', True, (0,0,0))
         screen.blit(text_surface, (100, 50))
     else:
         pg.quit()
