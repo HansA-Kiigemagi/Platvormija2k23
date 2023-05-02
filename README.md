@@ -1,7 +1,8 @@
-# Platvormija2k23
-
+# Platvormija 2k23
 Loojad: Hans Andre Kiigemägi ja Gerda Maire Kiiser
 
-Oled ruut, kes tahab väga katsuda mustasid ruutusid, kahjuks suudavad need su eest pidevalt põgeneda.
+Sa oled ruut, kes on õrnalt molli saamisest verine. Ta tahab väga katsuda mustasid ristkülikuid, aga need pidevalt põgenevad ta eest. Kas need kaks asja on seotud? Jumal teab.
 
-Mitu korda neid katsuda suudad, enne kui igav hakkab?
+Mitu ruutu suudad katsuda enne kui villanud hakkab?
+
+Liikumine nooltega, avamenüüs kasuta hiirt.
