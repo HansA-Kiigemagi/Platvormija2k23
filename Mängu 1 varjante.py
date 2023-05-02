@@ -12,6 +12,9 @@ screen = pg.display.set_mode((800,600))
 pg.display.set_caption("Mäng")
 clock = pg.time.Clock()
 
+# Mängu seis, 0-avamenüü; 1-mäng; 2-väljumine
+mangu_seis = 0
+
 
 # Tausta ja muu import
 x = 200
@@ -47,16 +50,15 @@ gravitatsioon = 0
 
 
 while True:
+    # Käskude kordumine
     pg.time.delay(10)
 
+    # Klaviatuuri käsud
     for event in pg.event.get():
+        #Väljumine
         if event.type == pg.QUIT:
             pg.quit()
             exit()
-
-    screen.blit(background_image, (0, 0))
-
-    screen.blit(plat_surf, plat_rect)
 
     #hüpe
     if event.type == pg.KEYDOWN:
@@ -70,8 +72,15 @@ while True:
         if event.key == pg.K_LEFT:
             tegelase_image_parem_rect.x -= 10
             tegelase_image_vasak_rect.x -= 10
+    # Hiir
+    if event.type == pg.MOUSEBUTTONDOWN:
+        if start_nupp_rect.collidepoint(event.pos):
+            mangu_seis = 1
+        if valju_nupp_rect.collidepoint(event.pos):
+            mangu_seis = 2
 
 
+    # Gravitatsiooni muut
     gravitatsioon += 1
     tegelase_image_parem_rect.y += gravitatsioon
     tegelase_image_vasak_rect.y += gravitatsioon
@@ -98,22 +107,42 @@ while True:
     if tegelase_image_vasak_rect.x > 800:
         tegelase_image_vasak_rect.x = 0
 
-    #Suund
-    if suund == "parem":
-        screen.blit(tegelase_image_parem, tegelase_image_parem_rect)
-    elif suund == "vasak":
-        screen.blit(tegelase_image_vasak, tegelase_image_vasak_rect)
 
     #Kokkupõrge
     if tegelase_image_parem_rect.colliderect(plat_rect):
         punktid += 1
         plat_rect.bottomleft = (randint(0, 700), randint(0, 550))
-        #Platvorm, mida püütakse müüdab iga kord suurust
+        #Platvorm, mida püütakse muudab iga kord suurust
         plat_surf = pg.Surface((randint(10,100), randint(10,100)))
 
-    #Punktide näitamine
-    text_surface = test_font.render(f'Punkte: {punktid}', True, 'Black')
-    screen.blit(text_surface, (100, 50))
+
+    if mangu_seis == 0:
+        # Avamenüü nupud
+        start_nupp_surf = pg.image.load("start_nupp.png")
+        start_nupp_rect = start_nupp_surf.get_rect(center=(400, 200))
+        valju_nupp_surf = pg.image.load("välju_nupp.png")
+        valju_nupp_rect = valju_nupp_surf.get_rect(center=(400, 400))
+        # Avamenüü joonistamine
+        screen.blit(background_image, (0,0))
+        screen.blit(start_nupp_surf, start_nupp_rect)
+        screen.blit(valju_nupp_surf, valju_nupp_rect)
+    elif mangu_seis == 1:
+        # Käiva mängu joonistamine
+        screen.blit(background_image, (0, 0))
+            # Tegelase suund
+        if suund == "parem":
+            screen.blit(tegelase_image_parem, tegelase_image_parem_rect)
+        elif suund == "vasak":
+            screen.blit(tegelase_image_vasak, tegelase_image_vasak_rect)
+            # Platvorm
+        screen.blit(plat_surf, plat_rect)
+
+        #Punktide näitamine
+        text_surface = test_font.render(f'Punkte: {punktid}', True, 'Black')
+        screen.blit(text_surface, (100, 50))
+    else:
+        pg.quit()
+        exit()
 
     pg.display.update()
     clock.tick(60)
