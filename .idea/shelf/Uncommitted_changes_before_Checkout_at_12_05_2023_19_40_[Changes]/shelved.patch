@@ -1,0 +1,191 @@
+Index: .idea/workspace.xml
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -2,7 +2,13 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="bdbb6638-7009-47aa-a6cb-12ed2f72eb66" name="Changes" comment="muudatused tasanditega">
++      <change afterPath="$PROJECT_DIR$/Platvormija2k23.py" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/start_nupp.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/välju_nupp.png" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Hans_manguvariant.py" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/Nimetu.png" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Videojames.py" beforeDir="false" afterPath="$PROJECT_DIR$/Videojames.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -20,7 +26,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="main" />
++        <entry key="$PROJECT_DIR$" value="GerdaBranch1" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -28,21 +34,25 @@
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+   </component>
+-  <component name="ProjectId" id="2M3eHKuhqLuVYwWbi1Z6W6VZXfC" />
++  <component name="ProjectId" id="2OaAohRvRbJjruSfeLimJjgLiqG" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/gerda/Platvormija2k23&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "last_opened_file_path": "C:/Users/gerda/Platvormija2k23/Platvormija2k23.py"
++  },
++  "keyToStringList": {
++    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
++      "Python"
++    ]
+   }
+-}</component>
++}]]></component>
+   <component name="RunManager">
+-    <configuration name="Fail.tekst" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
++    <configuration name="Mäng" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="Platvormija2k23" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+@@ -54,7 +64,7 @@
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Fail.tekst.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Mäng.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -63,7 +73,7 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="Mäng" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++    <configuration name="Mängu 1 varjante" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="Platvormija2k23" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+@@ -75,7 +85,7 @@
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Mäng.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Mängu 1 varjante.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -97,6 +107,27 @@
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/UusFail.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <option name="MODULE_MODE" value="false" />
++      <option name="REDIRECT_INPUT" value="false" />
++      <option name="INPUT_FILE" value="" />
++      <method v="2" />
++    </configuration>
++    <configuration name="Videojames" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
++      <module name="Platvormija2k23" />
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="IS_MODULE_SDK" value="true" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Videojames.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -109,8 +140,8 @@
+       <list>
+         <item itemvalue="Python.UusFail" />
+         <item itemvalue="Python.Mäng" />
++        <item itemvalue="Python.Mängu 1 varjante" />
+         <item itemvalue="Python.UusFail" />
+-        <item itemvalue="Python.Mäng" />
+         <item itemvalue="Python.Mäng" />
+       </list>
+     </recent_temporary>
+@@ -118,19 +149,12 @@
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+-      <changelist id="bdbb6638-7009-47aa-a6cb-12ed2f72eb66" name="Changes" comment="" />
+-      <created>1677000603325</created>
++      <changelist id="bdbb6638-7009-47aa-a6cb-12ed2f72eb66" name="Changes" comment="muudatused tasanditega" />
++      <created>1681788498660</created>
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+-      <updated>1677000603325</updated>
++      <updated>1681788498660</updated>
+     </task>
+-    <task id="LOCAL−00001" summary="muudatused tasanditega">
+-      <created>1680536685337</created>
+-      <option name="number" value="LOCAL−00001" />
+-      <option name="presentableId" value="LOCAL−00001" />
+-      <updated>1680536685337</updated>
+-    </task>
+-    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -144,8 +168,4 @@
+       </map>
+     </option>
+   </component>
+-  <component name="VcsManagerConfiguration">
+-    <MESSAGE value="muudatused tasanditega" />
+-    <option name="LAST_COMMIT_MESSAGE" value="muudatused tasanditega" />
+-  </component>
+ </project>
+\ No newline at end of file
+Index: README.md
+===================================================================
+diff --git a/README.md b/README.md
+--- a/README.md	
++++ b/README.md	
+@@ -1,6 +1,5 @@
+-# Platvormija2k23
++
+ <<<<<<< HEAD
+-
+ Hans Andre Variant
+ =======
+ Esimene versioon\
+@@ -18,6 +17,14 @@
+ teise branch'i muudatus
+ >>>>>>> ac4d934d142f766c2ec8447fd16efc7e232e8bbf
+ >>>>>>> c2239c601925adcaeb43315638e45bc5b61e2d5b
++=======
++# Platvormija 2k23
++Loojad: Hans Andre Kiigemägi ja Gerda Maire Kiiser
++>>>>>>> 85ec6b75844ffee6e11748474d94d81da9430c69
++
+ 
++Sa oled ruut, kes on õrnalt molli saamisest verine. Ta tahab väga katsuda mustasid ristkülikuid, aga need pidevalt põgenevad ta eest. Kas need kaks asja on seotud? Jumal teab.
+ 
+-main
++Mitu ruutu suudad katsuda enne kui villanud hakkab?
++
++Liikumine nooltega, avamenüüs kasuta hiirt.
+\ No newline at end of file

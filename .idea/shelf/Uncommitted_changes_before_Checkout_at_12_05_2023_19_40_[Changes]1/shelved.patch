@@ -1,0 +1,334 @@
+Index: Videojames.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Videojames.py b/Videojames.py
+deleted file mode 100644
+--- a/Videojames.py	
++++ /dev/null	
+@@ -1,88 +0,0 @@
+-import pygame as pg
+-from sys import exit
+-import pygame.image
+-from random import randint
+-
+-
+-pg.init()
+-# Ekraan ja muu põhi
+-screen = pg.display.set_mode((800,600))
+-pg.display.set_caption("Mäng")
+-clock = pg.time.Clock()
+-
+-# Tausta ja muu import
+-background_image = pygame.image.load("taust.png")
+-tegelase_image_vasak = pg.image.load("Nimetu_vasak.png")
+-tegelase_image_parem = pg.image.load("Nimetu_parem.png")
+-
+-
+-# Liikumiskiirus
+-spd = 5
+-
+-# Hüppe parameetrid
+-isJump = False
+-jump_frames = 10
+-
+-#Maapind ja sellega seonduv
+-a = 200
+-b = 500
+-kuju = pg.Surface((100, 20))
+-
+-# Ruudu koordinaadid
+-x = 0
+-y = 570
+-suund = "parem"
+-
+-tegelane = pg.Surface((30,30))
+-tegelane.fill((255,0,0))
+-
+-
+-
+-
+-while True:
+-    pg.time.delay(10)
+-    for event in pg.event.get():
+-        if event.type == pg.QUIT:
+-            pg.quit()
+-            exit()
+-
+-    key = pg.key.get_pressed()
+-
+-    if key[pg.K_RIGHT]:
+-        suund = "parem"
+-        if x >= 800:
+-            x = 0
+-        else:
+-            x += spd
+-    if key[pg.K_LEFT]:
+-        suund = "vasak"
+-        if x <= 0:
+-            x = 800
+-        else:
+-            x -= spd
+-    if not(isJump):
+-        if key[pygame.K_UP]:
+-            isJump = True
+-    else:
+-        if jump_frames >= -10:
+-            y -= (jump_frames * abs(jump_frames)) * 0.5
+-            jump_frames -= 1
+-        else:
+-            jump_frames = 10
+-            isJump = False
+-
+-
+-    screen.blit(background_image, (0, 0))
+-
+-    if suund == "parem":
+-        screen.blit(tegelase_image_parem, (x, y))
+-    elif suund == "vasak":
+-        screen.blit(tegelase_image_vasak, (x, y))
+-
+-# kui tegelenae puutub kuju, siis ilmub teine tasand välja(radnint)
+-    a = randint(0, 770)
+-    b = randint(0, 600)
+-    screen.blit(kuju, (a,b))
+-
+-    pg.display.update()
+-    clock.tick(60)
+Index: Hans_manguvariant.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Hans_manguvariant.py b/Hans_manguvariant.py
+deleted file mode 100644
+--- a/Hans_manguvariant.py	
++++ /dev/null	
+@@ -1,55 +0,0 @@
+-import pygame
+-
+-pygame.init()
+-
+-win = pygame.display.set_mode((500, 500))
+-pygame.display.set_caption("First Game")
+-
+-x = 50
+-y = 50
+-width = 40
+-height = 60
+-vel = 5
+-
+-isJump = False
+-jumpCount = 10
+-
+-run = True
+-
+-while run:
+-    pygame.time.delay(100)
+-
+-    for event in pygame.event.get():
+-        if event.type == pygame.QUIT:
+-            run = False
+-
+-    keys = pygame.key.get_pressed()
+-
+-    if keys[pygame.K_LEFT] and x > vel:
+-        x -= vel
+-
+-    if keys[pygame.K_RIGHT] and x < 500 - vel - width:
+-        x += vel
+-
+-    if not (isJump):
+-        if keys[pygame.K_UP] and y > vel:
+-            y -= vel
+-
+-        if keys[pygame.K_DOWN] and y < 500 - height - vel:
+-            y += vel
+-
+-        if keys[pygame.K_SPACE]:
+-            isJump = True
+-    else:
+-        if jumpCount >= -10:
+-            y -= (jumpCount * abs(jumpCount)) * 0.5
+-            jumpCount -= 1
+-        else:
+-            jumpCount = 10
+-            isJump = False
+-
+-    win.fill((0, 0, 0))
+-    pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
+-    pygame.display.update()
+-
+-pygame.quit()
+\ No newline at end of file
+Index: Platvormija2k23.py
+===================================================================
+diff --git a/Platvormija2k23.py b/Platvormija2k23.py
+new file mode 100644
+--- /dev/null	
++++ b/Platvormija2k23.py	
+@@ -0,0 +1,163 @@
++import pygame as pg
++from sys import exit
++import pygame.image
++from pygame import Rect
++from random import randint
++
++
++
++pg.init()
++# Ekraan ja muu põhi
++screen = pg.display.set_mode((800,600))
++pg.display.set_caption("Mäng")
++clock = pg.time.Clock()
++
++# Mängu seis, 0-avamenüü; 1-mäng; 2-väljumine
++mangu_seis = 0
++
++
++# Tausta ja muu import
++x = 200
++y = 470
++background_image = pygame.image.load("taust.png")
++tegelase_image_vasak = pg.image.load("Nimetu_vasak.png")
++tegelase_image_vasak_rect = tegelase_image_vasak.get_rect(bottomleft = (x, y))
++tegelase_image_parem = pg.image.load("Nimetu_parem.png")
++tegelase_image_parem_rect = tegelase_image_parem.get_rect(bottomleft = (x, y))
++
++
++# Ruudu koordinaadid
++suund = "parem"
++
++
++#Tegelane
++tegelane = pg.Surface((30,30))
++tegelane.fill((255,0,0))
++
++
++#Platvorm
++plat_surf = pg.Surface((100, 20))
++plat_rect = plat_surf.get_rect(bottomleft = (100, 500))
++
++
++#Punktid
++punktid = 0
++test_font = pg.font.Font(None, 30)
++text_surface = test_font.render(f'Punkte {punktid}', True, (0,0,0))
++
++#Gravitatsioon
++gravitatsioon = 0
++
++# Taimer
++current_time = 0
++
++
++while True:
++    # Käskude kordumine
++    pg.time.delay(10)
++
++    # Klaviatuuri käsud
++    for event in pg.event.get():
++        #Väljumine
++        if event.type == pg.QUIT:
++            pg.quit()
++            exit()
++
++    #hüpe
++    if event.type == pg.KEYDOWN:
++        if event.key == pg.K_UP:
++            gravitatsioon = -15
++    #paremale-vasakule
++    if event.type == pg.KEYDOWN:
++        if event.key == pg.K_RIGHT:
++            suund = "parem"
++            tegelase_image_parem_rect.x += 10
++            tegelase_image_vasak_rect.x += 10
++        if event.key == pg.K_LEFT:
++            suund = "vasak"
++            tegelase_image_parem_rect.x -= 10
++            tegelase_image_vasak_rect.x -= 10
++    # Hiir
++    if event.type == pg.MOUSEBUTTONDOWN:
++        if start_nupp_rect.collidepoint(event.pos):
++            mangu_seis = 1
++        if valju_nupp_rect.collidepoint(event.pos):
++            mangu_seis = 2
++
++
++    # Gravitatsiooni muut
++    gravitatsioon += 1
++    tegelase_image_parem_rect.y += gravitatsioon
++    tegelase_image_vasak_rect.y += gravitatsioon
++
++    #Tegelane ei lähe madalamale, kui 600 ('püsib maapinnal')
++    if tegelase_image_vasak_rect.bottom >= 600:
++        tegelase_image_vasak_rect.bottom = 600
++    if tegelase_image_parem_rect.bottom >= 600:
++        tegelase_image_parem_rect.bottom = 600
++
++    #Tegelane ei lähe mänguaknast välja
++    if tegelase_image_parem_rect.y < 0:
++        tegelase_image_parem_rect.y = 0
++    if tegelase_image_vasak_rect.y < 0:
++        tegelase_image_vasak_rect.y = 0
++
++    #Kui tegelane liigub ühest küljes välja, ilmub ta teisest küljest
++    if tegelase_image_parem_rect.x < 0:
++        tegelase_image_parem_rect.x = 800
++    if tegelase_image_vasak_rect.x < 0:
++        tegelase_image_vasak_rect.x = 800
++    if tegelase_image_parem_rect.x > 800:
++        tegelase_image_parem_rect.x = 0
++    if tegelase_image_vasak_rect.x > 800:
++        tegelase_image_vasak_rect.x = 0
++
++
++    #Kokkupõrge
++    if tegelase_image_parem_rect.colliderect(plat_rect):
++        punktid += 1
++        plat_rect.bottomleft = (randint(0, 700), randint(0, 550))
++        #Platvorm, mida püütakse muudab iga kord suurust
++        plat_surf = pg.Surface((randint(10,100), randint(10,100)))
++
++
++    if mangu_seis == 0:
++        # Avamenüü nupud
++        start_nupp_surf = pg.image.load("start_nupp.png")
++        start_nupp_rect = start_nupp_surf.get_rect(center=(400, 200))
++        valju_nupp_surf = pg.image.load("välju_nupp.png")
++        valju_nupp_rect = valju_nupp_surf.get_rect(center=(400, 400))
++        # Avamenüü joonistamine
++        screen.blit(background_image, (0,0))
++        screen.blit(start_nupp_surf, start_nupp_rect)
++        screen.blit(valju_nupp_surf, valju_nupp_rect)
++    elif mangu_seis == 1:
++        # Käiva mängu joonistamine
++        screen.blit(background_image, (0, 0))
++            # Tegelase suund
++        if suund == "parem":
++            screen.blit(tegelase_image_parem, tegelase_image_parem_rect)
++        elif suund == "vasak":
++            screen.blit(tegelase_image_vasak, tegelase_image_vasak_rect)
++            # Platvorm
++        screen.blit(plat_surf, plat_rect)
++
++        #Punktide näitamine
++        text_surface = test_font.render(f'Punkte: {punktid}', True, (0,0,0))
++        screen.blit(text_surface, (100, 50))
++    else:
++        pg.quit()
++        exit()
++
++    #Mängu lõppnupp
++    lõppnupp_surf = pg.image.load("Lõpuekraan.png")
++    #Taimer
++    current_time = pg.time.get_ticks()
++    if current_time > 30000:
++        screen.blit(lõppnupp_surf,(0, 0))
++        text_surface = test_font.render(f'Punkte mängust: {punktid}', True, (0, 0, 0))
++        screen.blit(text_surface, (300, 350))
++    print(current_time)
++
++    pg.display.update()
++    clock.tick(60)
