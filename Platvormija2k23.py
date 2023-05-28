@@ -48,6 +48,9 @@ text_surface = test_font.render(f'Punkte {punktid}', True, (0,0,0))
 #Gravitatsioon
 gravitatsioon = 0
 
+# Taimer
+current_time = 0
+
 
 while True:
     # Käskude kordumine
@@ -145,6 +148,16 @@ while True:
     else:
         pg.quit()
         exit()
+
+    #Mängu lõppnupp
+    lõppnupp_surf = pg.image.load("Lõpuekraan.png")
+    #Taimer
+    current_time = pg.time.get_ticks()
+    if current_time > 30000:
+        screen.blit(lõppnupp_surf,(0, 0))
+        text_surface = test_font.render(f'Punkte mängust: {punktid}', True, (0, 0, 0))
+        screen.blit(text_surface, (300, 350))
+    print(current_time)
 
     pg.display.update()
     clock.tick(60)
