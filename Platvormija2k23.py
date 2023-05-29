@@ -12,7 +12,7 @@ screen = pg.display.set_mode((800,600))
 pg.display.set_caption("Mäng")
 clock = pg.time.Clock()
 
-# Mängu seis, 0-avamenüü; 1-mäng; 2-väljumine
+# Mängu seis, 0-avamenüü; 1-30sek mäng; 2-lõpuekraan
 mangu_seis = 0
 
 
@@ -44,6 +44,7 @@ plat_rect = plat_surf.get_rect(bottomleft = (100, 500))
 punktid = 0
 test_font = pg.font.Font(None, 30)
 text_surface = test_font.render(f'Punkte {punktid}', True, (0,0,0))
+puutuda = 1
 
 #Gravitatsioon
 gravitatsioon = 0
@@ -78,11 +79,12 @@ while True:
             tegelase_image_parem_rect.x -= 10
             tegelase_image_vasak_rect.x -= 10
     # Hiir
-    if event.type == pg.MOUSEBUTTONDOWN:
-        if start_nupp_rect.collidepoint(event.pos):
+    if event.type == pg.MOUSEBUTTONDOWN and mangu_seis == 0:
+        kliki_aeg = pg.time.get_ticks()
+        if ajaga_nupp_rect.collidepoint(event.pos):
             mangu_seis = 1
-        if valju_nupp_rect.collidepoint(event.pos):
-            mangu_seis = 2
+        elif valju_nupp_rect.collidepoint(event.pos):
+            mangu_seis = 4
 
 
     # Gravitatsiooni muut
@@ -116,48 +118,51 @@ while True:
     #Kokkupõrge
     if tegelase_image_parem_rect.colliderect(plat_rect):
         punktid += 1
+        puutuda -= 1
         plat_rect.bottomleft = (randint(0, 700), randint(0, 550))
         #Platvorm, mida püütakse muudab iga kord suurust
         plat_surf = pg.Surface((randint(10,100), randint(10,100)))
 
-
+    # Mängu ekraanid
     if mangu_seis == 0:
         # Avamenüü nupud
-        start_nupp_surf = pg.image.load("start_nupp.png")
-        start_nupp_rect = start_nupp_surf.get_rect(center=(400, 200))
+        ajaga_nupp_surf = pg.image.load("30sek.png")
+        ajaga_nupp_rect = ajaga_nupp_surf.get_rect(center=(400, 125))
         valju_nupp_surf = pg.image.load("välju_nupp.png")
-        valju_nupp_rect = valju_nupp_surf.get_rect(center=(400, 400))
+        valju_nupp_rect = valju_nupp_surf.get_rect(center=(400, 500))
         # Avamenüü joonistamine
         screen.blit(background_image, (0,0))
-        screen.blit(start_nupp_surf, start_nupp_rect)
+        screen.blit(ajaga_nupp_surf, ajaga_nupp_rect)
         screen.blit(valju_nupp_surf, valju_nupp_rect)
-    elif mangu_seis == 1:
+    elif mangu_seis == 1: # 30-sekundi mäng
         # Käiva mängu joonistamine
         screen.blit(background_image, (0, 0))
-            # Tegelase suund
+        # Tegelase suund
         if suund == "parem":
             screen.blit(tegelase_image_parem, tegelase_image_parem_rect)
         elif suund == "vasak":
             screen.blit(tegelase_image_vasak, tegelase_image_vasak_rect)
-            # Platvorm
+        # Platvorm
         screen.blit(plat_surf, plat_rect)
 
         #Punktide näitamine
         text_surface = test_font.render(f'Punkte: {punktid}', True, (0,0,0))
         screen.blit(text_surface, (100, 50))
+        if current_time - kliki_aeg > 30000:
+            mangu_seis = 2
+    elif mangu_seis == 2: # Lõpuekraan
+        lõppnupp_surf = pg.image.load("Lopuekraan.png")
+        # Taimer
+        screen.blit(lõppnupp_surf, (0, 0))
+        text_surface = test_font.render(f'Punkte mängust: {punktid}', True, (0, 0, 0))
+        screen.blit(text_surface, (300, 350))
+        if event.type == pg.MOUSEBUTTONDOWN:
+            mangu_seis = 0
+            punktid = 0
     else:
         pg.quit()
         exit()
-
-    #Mängu lõppnupp
-    lõppnupp_surf = pg.image.load("Lõpuekraan.png")
-    #Taimer
     current_time = pg.time.get_ticks()
-    if current_time > 30000:
-        screen.blit(lõppnupp_surf,(0, 0))
-        text_surface = test_font.render(f'Punkte mängust: {punktid}', True, (0, 0, 0))
-        screen.blit(text_surface, (300, 350))
     print(current_time)
-
     pg.display.update()
     clock.tick(60)
